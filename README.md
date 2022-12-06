@@ -68,8 +68,7 @@
       ```json
       {
           "code": 1,
-          "msg": "Random Dice Bad",
-          "body": 5
+          "msg": "Random Dice Bad"
       }
       ```
 
