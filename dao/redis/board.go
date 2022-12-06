@@ -31,7 +31,7 @@ func GetBoard(ctx context.Context, name string) (*dto.BoardDTO, error) {
 		return nil, err
 	}
 	var board dto.BoardDTO
-	err = json.Unmarshal([]byte(result), board)
+	err = json.Unmarshal([]byte(result), &board)
 	if err != nil {
 		return nil, err
 	}

@@ -17,10 +17,12 @@ func RandomBoard(c *gin.Context) {
 			Code: 1,
 			Msg:  err.Error(),
 		})
+	} else {
+		c.JSON(http.StatusOK, utils.BaseRsp{
+			Code: 0,
+			Msg:  "Random Board Success",
+			Body: board,
+		})
 	}
-	c.JSON(http.StatusOK, utils.BaseRsp{
-		Code: 0,
-		Msg:  "Random Board Success",
-		Body: board,
-	})
+
 }

@@ -20,10 +20,12 @@ func RandomDice(c *gin.Context) {
 			Code: 1,
 			Msg:  err.Error(),
 		})
+	} else {
+		c.JSON(http.StatusOK, utils.BaseRsp{
+			Code: 0,
+			Msg:  "Random Dice Success",
+			Body: dice,
+		})
 	}
-	c.JSON(http.StatusOK, utils.BaseRsp{
-		Code: 0,
-		Msg:  "Random Dice Success",
-		Body: dice,
-	})
+
 }
