@@ -1,0 +1,39 @@
+[http]
+host = ""
+port = "8080"
+
+
+[db]
+host = "127.0.0.1"
+port = 3306
+user = "root"
+password = "root"
+charset = "utf8mb4"
+data_base = "snake"
+max_conn = 5
+max_idle = 2
+conn_timeout = 100
+read_timeout = 100
+write_timeout = 100
+conn_life_time = 0
+parse_time = true
+time_zone = "Asia/Shanghai"
+is_postgres = false
+
+[redis]
+addrs = ["127.0.0.1:6379"]
+db = 0
+password = ""
+max_retries = 3
+dial_timeout = 100
+read_timeout = 100
+write_timeout = 100
+pool_size = 5
+min_idle_conns = 2
+max_conn_age = 0
+master_name = ""
+
+[server]
+version = "v1"
+api_secret = "snake"
+token_hour_lifespan = 1

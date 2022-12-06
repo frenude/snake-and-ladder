@@ -1,0 +1,39 @@
+version: '3.2'
+
+networks:
+  snake:
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
+          gateway: 172.19.0.1
+services:
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    networks:
+      snake:
+        ipv4_address: 172.19.0.5
+    ports:
+      - 3306:3306
+    restart: always
+    volumes:
+      - /Users/Frenude/SoftWare/Docker/mysql:/var/lib/mysql
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=root
+      - character-set-server=utf8mb4
+      - collation-server=utf8mb4_general_ci
+
+
+  redis:
+    image: redis
+    container_name: redis
+    networks:
+      snake:
+        ipv4_address: 172.19.0.10
+    ports:
+      - 6379:6379
+
+
+
