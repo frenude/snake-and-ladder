@@ -20,4 +20,5 @@ func RouterRegister(e *gin.Engine) {
 	AGroup.Use(middlewares.JwtAuthMiddleware())
 	// 随机骰子
 	AGroup.GET("/randomdice", RandomDice)
+	AGroup.GET("/randomdice", RandomDice)
 }
