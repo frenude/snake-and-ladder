@@ -210,9 +210,9 @@
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJib2FyZCI6ImNlN2tiYTI4cmE1NWZscm9ibmwwIiwiZXhwIjoxNjcwMzM3NDY0LCJwbGF5ZXIiOiJjZTdrYmEyOHJhNTVmbHJvYm5uMCJ9.1tlPezelHLRsyN57vJRLa6ZUkozi2mkQbSuij2MQXsc"
         ]
     }
-}
-// bad response
-{"code":0,"msg":"Random Board Failed"}
+  }
+  // bad response
+  {"code":0,"msg":"Random Board Failed"}
   ```
 
 - 随机投掷骰子
