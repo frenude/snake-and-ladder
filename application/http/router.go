@@ -21,4 +21,5 @@ func RouterRegister(e *gin.Engine) {
 	// 随机骰子
 	AGroup.GET("/randomdice", RandomDice)
 	AGroup.POST("/step", Step)
+	AGroup.GET("/replay", Replay)
 }

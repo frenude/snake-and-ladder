@@ -18,6 +18,9 @@ func Step(ctx context.Context, board, player string, chess *vo.Chess) (int, erro
 	if err == goredis.Nil || dice.Next != chess.Move || dice.NextPoint != chess.Point {
 		return 0, errors.New("存在作弊嫌疑，请重新按照标准输入")
 	}
+	if dice.NextPoint == 100 {
+		return 0, errors.New("游戏结束，请勿投掷骰子")
+	}
 	atoi, err := strconv.Atoi(board)
 	if err != nil {
 		return 0, err
