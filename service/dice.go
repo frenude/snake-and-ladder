@@ -9,7 +9,7 @@ import (
 func RandomDice(ctx context.Context, board, player string) (int, error) {
 
 	randomInt := vo.NewDice()
-	err := redis.SetDice(ctx, board, player, randomInt, 0, 0)
+	err := redis.SetDice(ctx, board, player, randomInt, 0, 0, 0, false)
 	if err != nil {
 		return 0, err
 	}

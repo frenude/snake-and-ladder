@@ -6,17 +6,19 @@ import (
 	"time"
 )
 
+type BoardReq struct {
+	PlayerNum int `json:"player_nums""`
+}
+
 type Board struct {
-	Name     string
+	Id       string
 	Position [][]int
 	Snake    [][]int
 	Ladder   [][]int
 	Player   []string
 }
 
-func NewBoard(n int) (*Board, error) {
-	snake, ladder := RandomSnakeAndLadder()
-	name := utils.GetId()
+func NewBoard(n int, name string, snake, ladder [][]int) (*Board, error) {
 	var player []string
 	for i := 0; i < n; i++ {
 		id := utils.GetId()
@@ -27,7 +29,7 @@ func NewBoard(n int) (*Board, error) {
 		player = append(player, token)
 	}
 	return &Board{
-		Name:     name,
+		Id:       name,
 		Position: GenSnakeBoard(10, 10),
 		Snake:    snake,
 		Ladder:   ladder,

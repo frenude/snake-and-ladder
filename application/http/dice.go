@@ -9,11 +9,10 @@ import (
 )
 
 func RandomDice(c *gin.Context) {
-	board := c.MustGet("board")
-	player := c.MustGet("player")
-
+	board := c.MustGet("board").(string)
+	player := c.MustGet("player").(string)
 	ctx := c.Request.Context()
-	dice, err := service.RandomDice(ctx, board.(string), player.(string))
+	dice, err := service.RandomDice(ctx, board, player)
 	if err != nil {
 		log.Errorf("Random Dice: %v", err)
 		c.JSON(http.StatusBadRequest, utils.BaseRsp{

@@ -18,7 +18,7 @@ func SetBoard(ctx context.Context, board *vo.Board) error {
 	if err != nil {
 		return err
 	}
-	err = redisClient.Set(ctx, board.Name, marshal, time.Hour).Err()
+	err = redisClient.Set(ctx, board.Id, marshal, time.Hour).Err()
 	if err != nil {
 		return err
 	}

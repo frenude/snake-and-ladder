@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/url"
 	"snake-and-ladder/conf"
+	"snake-and-ladder/model/po"
 	"time"
 )
 
@@ -32,6 +33,12 @@ func Init() error {
 	sqlDB.SetMaxIdleConns(config.DB.MaxIdle)
 	sqlDB.SetMaxOpenConns(config.DB.MaxConn)
 	sqlDB.SetConnMaxLifetime(time.Duration(config.DB.ConnLifeTime) * time.Second)
+	if !dbClient.Migrator().HasTable(&po.Board{}) {
+		dbClient.Migrator().CreateTable(&po.Board{})
+	}
+	if !dbClient.Migrator().HasTable(&po.Step{}) {
+		dbClient.Migrator().CreateTable(&po.Step{})
+	}
 	log.Println("db init success")
 	return nil
 }

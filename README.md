@@ -269,3 +269,74 @@
 
 
 - 存储走的路径
+
+  - `method POST`
+
+  - `url http://127.0.0.1:8080/api/v1/admin/step`
+
+  - 选择一个player 当作token 然后header 中传入 jwt 验证方式
+
+  - `headers`
+
+    ```json
+    "Authorization":"Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJib2FyZCI6ImNlN2tiYTI4cmE1NWZscm9ibmwwIiwiZXhwIjoxNjcwMzM3NDY0LCJwbGF5ZXIiOiJjZTdrYmEyOHJhNTVmbHJvYm5sZyJ9.p9v_pWVlAYTO18FMjO6LQNgC1St69715v_tMhA-dtV4"
+    ```
+
+  - `request`
+
+    ```json
+    {
+        "point":0, //当前位置 
+        "move":4	 //调用投掷骰子的结果
+    }
+    ```
+
+  - `response`
+
+    - good
+
+      ```json
+      {
+          "code": 0,
+          "msg": "Step  Gen Success",
+          "body": 4
+      }
+      ```
+
+    - Bad
+
+      ```json
+      {
+          "code": -1,
+          "msg": "重复输入请重新投掷骰子",
+      }
+      ```
+
+    - Bad
+
+      ```json
+      {
+          "code": -1,
+          "msg": "存在作弊嫌疑，请重新按照标准输入",
+      }
+      ```
+
+    - Bad
+
+      ```json
+      {
+          "code": -1,
+          "msg": "move 参数输入范围错误 请输入投掷骰子点数",
+      }
+      ```
+
+    - Bad
+
+      ```json
+      {
+          "code": -1,
+          "msg": "point 参数输入范围错误 请输入上一步位置或者0",
+      }
+      ```
+
+      
