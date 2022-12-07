@@ -12,13 +12,13 @@ func CreateBoard(ctx context.Context, board *po.Board) error {
 	}
 	return nil
 }
-func SelectBoards(ctx context.Context) ([]*po.Board, error) {
-	var findBorads []*po.Board
-	result := dbClient.Find(&findBorads)
+func SelectBoards(ctx context.Context, player string) ([]*po.Step, error) {
+	var findSteps []*po.Step
+	result := dbClient.Where("u_name = ?", player).Find(&findSteps)
 	if result.Error != nil {
 		return nil, result.Error
 	}
-	return findBorads, nil
+	return findSteps, nil
 }
 func SelectBoard(ctx context.Context, id uint) (*po.Board, error) {
 	var findBorad *po.Board

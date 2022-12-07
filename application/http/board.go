@@ -19,7 +19,6 @@ func RandomBoard(c *gin.Context) {
 			Code: 1,
 			Msg:  err.Error(),
 		})
-		return
 	}
 	board, err := service.RandomBoard(ctx, breq.PlayerNum)
 	if err != nil {
@@ -35,5 +34,4 @@ func RandomBoard(c *gin.Context) {
 			Body: board,
 		})
 	}
-
 }

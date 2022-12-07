@@ -9,10 +9,9 @@ import (
 )
 
 func Replay(c *gin.Context) {
-	board := c.MustGet("board").(string)
-	player := c.MustGet("player").(string)
+	board := c.DefaultQuery("board", "1")
 	ctx := c.Request.Context()
-	replay, err := service.Replay(ctx, board, player)
+	replay, err := service.Replay(ctx, board)
 	if err != nil {
 		log.Errorf("Replay Gen: %v", err)
 		c.JSON(http.StatusBadRequest, utils.BaseRsp{

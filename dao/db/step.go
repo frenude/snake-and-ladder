@@ -13,6 +13,19 @@ func CreateStep(ctx context.Context, step *po.Step) error {
 	}
 	return nil
 }
+func SelectUsers(ctx context.Context, boardId uint) ([]string, error) {
+	var findSteps []*po.Step
+	//result := dbClient.Where("bid=?", boardId).Find(&findSteps)
+	var names []string
+	result := dbClient.Model(&findSteps).Distinct().Pluck("u_name", &names)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	if findSteps == nil {
+		return nil, errors.New("查询数据不存在")
+	}
+	return names, nil
+}
 
 func SelectStep(ctx context.Context, boardId uint, player string) (begin []int, throw []int, err error) {
 	var findSteps []*po.Step

@@ -16,10 +16,11 @@ func RouterRegister(e *gin.Engine) {
 	vGroup := e.Group(version)
 	// 随机棋盘
 	vGroup.POST("/randomboard", RandomBoard)
+	vGroup.GET("/replay", Replay)
 	AGroup := vGroup.Group("/admin")
 	AGroup.Use(middlewares.JwtAuthMiddleware())
 	// 随机骰子
 	AGroup.GET("/randomdice", RandomDice)
 	AGroup.POST("/step", Step)
-	AGroup.GET("/replay", Replay)
+
 }

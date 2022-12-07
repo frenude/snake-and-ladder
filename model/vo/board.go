@@ -15,18 +15,21 @@ type Board struct {
 	Position [][]int
 	Snake    [][]int
 	Ladder   [][]int
+	Token    []string
 	Player   []string
 }
 
 func NewBoard(n int, name string, snake, ladder [][]int) (*Board, error) {
+	var token []string
 	var player []string
 	for i := 0; i < n; i++ {
 		id := utils.GetId()
-		token, err := utils.GenerateToken(name, id)
+		player = append(player, id)
+		t, err := utils.GenerateToken(name, id)
 		if err != nil {
 			return nil, err
 		}
-		player = append(player, token)
+		token = append(token, t)
 	}
 	return &Board{
 		Id:       name,
@@ -34,6 +37,7 @@ func NewBoard(n int, name string, snake, ladder [][]int) (*Board, error) {
 		Snake:    snake,
 		Ladder:   ladder,
 		Player:   player,
+		Token:    token,
 	}, nil
 }
 

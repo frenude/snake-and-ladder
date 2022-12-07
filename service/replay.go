@@ -10,8 +10,9 @@ import (
 	"strconv"
 )
 
-func Replay(ctx context.Context, board, player string) (*vo.Game, error) {
+func Replay(ctx context.Context, board string) (*vo.Game, error) {
 	var game vo.Game
+	var players []string
 	game.Id = board
 	game.Position = vo.GenSnakeBoard(10, 10)
 	getBoard, err := redis.GetBoard(ctx, board)
@@ -21,6 +22,11 @@ func Replay(ctx context.Context, board, player string) (*vo.Game, error) {
 			return nil, err
 		}
 		selectBoard, err := db.SelectBoard(ctx, uint(atoi))
+		if err != nil {
+			return nil, err
+		}
+		users, err := db.SelectUsers(ctx, uint(atoi))
+		players = users
 		if err != nil {
 			return nil, err
 		}
@@ -42,25 +48,34 @@ func Replay(ctx context.Context, board, player string) (*vo.Game, error) {
 	if getBoard != nil {
 		game.Snake = getBoard.Snake
 		game.Ladder = getBoard.Ladder
+		players = getBoard.Players
 	}
-	dice, err := redis.GetDice(ctx, board, player)
-	if err == goredis.Nil {
-		atoi, err := strconv.Atoi(board)
-		if err != nil {
+	var ps []vo.Player
+	for i := 0; i < len(players); i++ {
+		var s vo.Player
+		player := players[i]
+		s.Name = player
+		dice, err := redis.GetDice(ctx, board, player)
+		if err == goredis.Nil {
+			atoi, err := strconv.Atoi(board)
+			if err != nil {
+				return nil, err
+			}
+			begin, throw, err := db.SelectStep(ctx, uint(atoi), player)
+			if err != nil {
+				return nil, err
+			}
+			s.Throw = throw
+			s.Begin = begin
+		} else if err != nil {
 			return nil, err
 		}
-		begin, throw, err := db.SelectStep(ctx, uint(atoi), player)
-		if err != nil {
-			return nil, err
+		if dice != nil {
+			s.Begin = dice.Begin
+			s.Throw = dice.Throw
 		}
-		game.Throw = throw
-		game.Begin = begin
-	} else if err != nil {
-		return nil, err
+		ps = append(ps, s)
 	}
-	if dice != nil {
-		game.Begin = dice.Begin
-		game.Throw = dice.Throw
-	}
+	game.Player = ps
 	return &game, nil
 }
