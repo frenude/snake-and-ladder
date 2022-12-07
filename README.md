@@ -225,7 +225,7 @@
     - Bad
 
       ```json
-      {"code":1,"msg":"Random Board Failed"}
+      {"code":0,"msg":"Random Board Failed"}
       ```
 
 - 随机投掷骰子
@@ -261,6 +261,14 @@
           "code": 1,
           "msg": "Random Dice Bad",
           "body": 5
+      }
+      ```
+
+    - Bad
+
+      ```json
+      {    "code": -1,    
+       			"msg": "游戏结束，请勿投掷骰子",
       }
       ```
 
@@ -307,7 +315,7 @@
 
       ```json
       {
-          "code": 1,
+          "code": -1,
           "msg": "重复输入请重新投掷骰子",
       }
       ```
@@ -316,7 +324,7 @@
 
       ```json
       {
-          "code": 1,
+          "code": -1,
           "msg": "存在作弊嫌疑，请重新按照标准输入",
       }
       ```
@@ -325,7 +333,7 @@
 
       ```json
       {
-          "code": 1,
+          "code": -1,
           "msg": "move 参数输入范围错误 请输入投掷骰子点数",
       }
       ```
@@ -334,8 +342,17 @@
 
       ```json
       {
-          "code": 1,
+          "code": -1,
           "msg": "point 参数输入范围错误 请输入上一步位置或者0",
+      }
+      ```
+
+    - Bad
+
+      ```json
+      {
+          "code": -1,
+          "msg": "游戏结束，请勿投掷骰子",
       }
       ```
 
