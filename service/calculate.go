@@ -8,6 +8,9 @@ import (
 
 func CalculateNextPoint(ctx context.Context, snake, ladder [][]int, chess *vo.Chess) int {
 	s := chess.Point + chess.Move
+	if s >= 100 {
+		return 100 - (s - 100)
+	}
 	for i := 0; i < len(snake); i++ {
 		inSlice := snake[i]
 		sort.Sort(sort.Reverse(sort.IntSlice(inSlice)))
